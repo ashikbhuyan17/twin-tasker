@@ -2,8 +2,11 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // images: {
+  //   domains: ['themes12.anvanto.com'],
+  // },
   images: {
-    domains: ['themes12.anvanto.com'],
+    unoptimized: true,
   },
 };
 

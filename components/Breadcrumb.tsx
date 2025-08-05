@@ -12,10 +12,10 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ title }) => {
 
   return (
     <nav className="w-full shadow-sm bg-white sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-3">
+      <div className="md:max-w-7xl mx-auto flex justify-between items-center px-4 py-3">
         <button
           onClick={() => router.back()}
-          className="p-2 rounded-full shadow hover:bg-gray-100 transition"
+          className="p-2 rounded-full shadow hover:bg-gray-100 transition cursor-pointer"
           aria-label="Go back"
         >
           <ArrowLeft className="h-5 w-5" />

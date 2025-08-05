@@ -71,9 +71,9 @@ export const updateProduct = async (id: number, product: ProductInput) => {
 };
 
 // GET single product
-export const getProduct = async (id: number) => {
+export const getProduct = async () => {
   try {
-    const response = await fetch(`${apiBaseUrl}/${id}`, {
+    const response = await fetch(`${apiBaseUrl}/v1/products`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
