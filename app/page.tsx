@@ -16,6 +16,24 @@ export default function Home() {
           </div>
         </div>
       </nav>
+      <div className="flex gap-3 min-h-screen justify-center items-center w-full">
+        <Button
+          asChild
+          variant="outline"
+          className="w-[200px] h-[200px] hover:bg-red-500 hover:text-white"
+        >
+          <Link href="/tic-tac-toe/setup" className="font-semibold">
+            Assignment-1
+          </Link>
+        </Button>
+        <Button
+          asChild
+          variant="outline"
+          className="w-[200px] h-[200px] hover:bg-red-500 hover:text-white"
+        >
+          <Link href="/product-crud">Assignment-2</Link>
+        </Button>
+      </div>
     </>
   );
 }
