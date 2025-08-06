@@ -70,8 +70,46 @@ export const updateProduct = async (id: number, product: ProductInput) => {
   }
 };
 
-// GET single product
-export const getProduct = async () => {
+// GET  product
+export const getProduct = async ({
+  categorySlug = '',
+  search = '',
+  offset = 0,
+  limit = 10,
+}) => {
+  const url = new URL(`${apiBaseUrl}/v1/products`);
+  url.searchParams.set('categorySlug', categorySlug);
+  url.searchParams.set('title', search);
+  url.searchParams.set('offset', String(offset));
+  url.searchParams.set('limit', String(limit));
+
+  try {
+    const response = await fetch(url.toString(), {
+      headers: { 'Content-Type': 'application/json' },
+      cache: 'no-store',
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return {
+        data: null,
+        error: data?.message || 'Failed to fetch product.',
+      };
+    }
+
+    return {
+      data,
+      error: null,
+    };
+  } catch (error) {
+    return {
+      data: null,
+      error: error instanceof Error ? error.message : 'Unknown error occurred',
+    };
+  }
+};
+export const getTotalProduct = async () => {
   try {
     const response = await fetch(`${apiBaseUrl}/v1/products`, {
       method: 'GET',
