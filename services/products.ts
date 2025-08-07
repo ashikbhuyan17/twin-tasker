@@ -209,3 +209,35 @@ export const getCategories = async () => {
     };
   }
 };
+
+export const deleteProduct = async (productId: number) => {
+  try {
+    const response = await fetch(`${apiBaseUrl}/v1/products/${productId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      cache: 'no-store',
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return {
+        data: null,
+        error: data?.message || 'Failed to delete product.',
+      };
+    }
+
+    return {
+      data,
+      error: null,
+    };
+  } catch (error) {
+    console.error('❌ Error deleting product:', error);
+    return {
+      data: null,
+      error: error instanceof Error ? error.message : 'Unknown error occurred',
+    };
+  }
+};

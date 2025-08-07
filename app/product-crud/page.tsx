@@ -11,6 +11,7 @@ import topImg from '../../public/file.svg';
 import defaultImg from '../../public/default.png';
 import CustomPagination from './_components/Pagination';
 import { FilePenLine, PackagePlus } from 'lucide-react';
+import { ProductDeleteButton } from './_components/ProductDeleteButton';
 
 interface Props {
   searchParams: { category?: string; search?: string; page?: string };
@@ -142,8 +143,7 @@ export default async function ProductList({
           <div>
             <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 max-md:pt-4 gap-2 md:gap-4 w-full pb-10">
               {products?.data?.map((product: Product) => (
-                <Link
-                  href={`/product-crud/${product.id}`}
+                <div
                   key={product.id}
                   className="group shadow-md rounded-md p-2 duration-300 ease-in-out hover:shadow-xl cursor-pointer"
                 >
@@ -157,17 +157,23 @@ export default async function ProductList({
                       priority
                     />
                     {/* On Sale and Discount Badges */}
-                    <div className="absolute top-2 right-0 space-y-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                    <div className="absolute top-2 bg-black right-0 space-y-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
                       <p className="text-[10px] py-[1px] px-1">
                         <Link href={`/product-crud/edit/${product.id}`}>
                           <FilePenLine className="w-5 h-5 text-primary" />
                         </Link>
                       </p>
+                      <p className="text-[10px] py-[1px] px-1">
+                        <ProductDeleteButton productId={product.id} />
+                      </p>
                     </div>
                   </div>
 
-                  <div className="space-y-4 mt-4">
-                    <p className="min-h-[40px] max-md:text-sm">
+                  <Link
+                    href={`/product-crud/${product.id}`}
+                    className="space-y-2 flex flex-col justify-between h-[75px] "
+                  >
+                    <p className="min-h-[40px] text-sm font-semibold pt-1">
                       {product.title.length > 30
                         ? product.title.substring(0, 30) + '...'
                         : product.title}
@@ -182,8 +188,8 @@ export default async function ProductList({
                         add
                       </button>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </div>
               ))}
             </div>
             <CustomPagination
