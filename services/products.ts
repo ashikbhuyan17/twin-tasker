@@ -70,7 +70,7 @@ export const updateProduct = async (id: number, product: ProductInput) => {
   }
 };
 
-// GET  product
+// GET product
 export const getProduct = async ({
   categorySlug = '',
   search = '',
@@ -139,6 +139,39 @@ export const getTotalProduct = async () => {
     };
   }
 };
+
+// get single product
+export const getSingleProduct = async ({ productId }: { productId: string }) => {
+  try {
+    const response = await fetch(`${apiBaseUrl}/v1/products/${productId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      cache: 'no-store',
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return {
+        data: null,
+        error: data?.message || 'Failed to fetch product.',
+      };
+    }
+
+    return {
+      data,
+      error: null,
+    };
+  } catch (error) {
+    return {
+      data: null,
+      error: error instanceof Error ? error.message : 'Unknown error occurred',
+    };
+  }
+};
+
 
 export const getCategories = async () => {
   try {

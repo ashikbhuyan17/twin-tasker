@@ -10,17 +10,27 @@ import Link from 'next/link';
 import topImg from '../../public/file.svg';
 import defaultImg from '../../public/default.png';
 import CustomPagination from './_components/Pagination';
+import { PackagePlus } from 'lucide-react';
 
 interface Props {
   searchParams: { category?: string; search?: string; page?: string };
 }
 
-export default async function ProductList({ searchParams }: Props) {
-  const selectedCategory = searchParams?.category ?? '';
-  const search = searchParams?.search ?? '';
-  const currentPage = Number(searchParams?.page ?? '0');
-  console.log('🚀 ~ ProductList ~ currentPage:', currentPage);
-  const limit = 10;
+export default async function ProductList({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  // Await the searchParams promise to get the actual filter object
+  const filters = await searchParams;
+  // const selectedCategory = searchParams?.category ?? '';
+  // const search = searchParams?.search ?? '';
+  // const currentPage = Number(searchParams?.page ?? '0');
+  // const limit = 30;
+  const selectedCategory = (filters.category as string) ?? '';
+  const search = (filters.search as string) ?? '';
+  const currentPage = Number(filters.page ?? '0'); // Default to page 1
+  const limit = 30;
   const offset = currentPage;
 
   const [products, categories, totalProduct] = await Promise.all([
@@ -40,12 +50,12 @@ export default async function ProductList({ searchParams }: Props) {
   const totalPages = Math.ceil(total / limit);
 
   return (
-    <section className="lg:container mx-auto px-1 space-y-10">
+    <section className="lg:container mx-auto px-1 md:space-y-10">
       {/* Top Bar */}
       <section className="w-full shadow-sm bg-white sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-3">
-          <h1 className="text-lg font-semibold">Product List</h1>
-          <div className="flex gap-3">
+        <div className="md:max-w-7xl mx-auto flex justify-between items-center md:px-4 py-3">
+          <h1 className="text-lg font-semibold max-md:hidden">Product List</h1>
+          <div className="flex gap-3 ">
             <form method="GET" className="flex gap-2">
               <input
                 type="text"
@@ -68,22 +78,27 @@ export default async function ProductList({ searchParams }: Props) {
               </Button>
             </form>
             <Button asChild variant="outline" className="bg-primary text-white">
-              <Link href="/product-crud/create">Create</Link>
+              <Link href="/product-crud/create">
+                <span className="md:hidden block">
+                  <PackagePlus />
+                </span>{' '}
+                <span className="md:block hidden">Create</span>
+              </Link>
             </Button>
           </div>
         </div>
       </section>
 
-      <div className="flex items-start space-x-5">
+      <div className="flex items-start space-x-2 md:space-x-5">
         {/* Sidebar */}
-        <div className="w-[83px] md:w-[300px] sticky top-20 overflow-y-auto min-h-[calc(100vh-60px)] border-1 border-gray-200 rounded-md">
-          <div>
+        <div className="w-[83px] md:w-[300px] sticky top-20 overflow-y-auto min-h-[calc(100vh-100px)] border-1 border-gray-200 rounded-md">
+          <div className="max-h-[calc(100vh-60px)] overflow-y-scroll">
             {/* Top Picks */}
             <Link
               href={`?category=&search=${search}&page=${currentPage}`}
               className={`flex items-center gap-2 max-md:flex-col px-2 py-2 md:py-4 ${
                 selectedCategory === ''
-                  ? 'bg-[#E1F7D3] border-r-4 border-r-[#9DE76E]'
+                  ? 'bg-[#E1F7D3] border-r-2 md:border-r-4 border-r-[#9DE76E]'
                   : ''
               }`}
             >
@@ -103,7 +118,7 @@ export default async function ProductList({ searchParams }: Props) {
                 href={`?category=${cat.slug}&search=${search}&page=${currentPage}`}
                 className={`flex items-center gap-2 max-md:flex-col px-2 py-2 md:py-4 ${
                   selectedCategory === cat.slug
-                    ? 'bg-[#E1F7D3] border-r-4 border-r-[#9DE76E]'
+                    ? 'bg-[#E1F7D3] border-r-2 md:border-r-4 border-r-[#9DE76E]'
                     : ''
                 }`}
               >
@@ -123,7 +138,7 @@ export default async function ProductList({ searchParams }: Props) {
         {/* Product List */}
         {products?.data?.length > 0 ? (
           <div>
-            <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 gap-2 md:gap-4 w-full pb-10">
+            <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 max-md:pt-4 gap-2 md:gap-4 w-full pb-10">
               {products?.data?.map((product: Product) => (
                 <Link
                   href={`/product-crud/${product.id}`}

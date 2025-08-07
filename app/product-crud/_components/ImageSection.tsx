@@ -13,19 +13,18 @@ import {
 import { Card, CardContent } from '@/components/ui/card';
 import { Product } from '@/types';
 
-interface ProductImage {
-  link: string;
-  isThumb?: boolean;
+// interface ProductImage {
+//   link: string;
+//   isThumb?: boolean;
+// }
+interface ImageSectionProps {
+  product: Product;
 }
 
-const ImageSection = ({ product }: Product) => {
-  console.log('🚀 ~ ImageSection ~ product:', product);
+const ImageSection = ({ product }: ImageSectionProps) => {
   const [selectedImage, setSelectedImage] = useState(
     product?.images?.[0] || ''
   );
-  console.log('🚀 ~ ImageSection ~ selectedImage:', selectedImage);
-  //   const [api, setApi] = useState(null);
-  //   const [current, setCurrent] = useState(0);
 
   return (
     <>
