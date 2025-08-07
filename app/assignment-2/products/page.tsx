@@ -7,8 +7,8 @@ import {
 import { Category, Product } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
-import topImg from '../../public/file.svg';
-import defaultImg from '../../public/default.png';
+import topImg from '../../../public/file.svg';
+import defaultImg from '../../../public/default.png';
 import CustomPagination from './_components/Pagination';
 import { FilePenLine, PackagePlus } from 'lucide-react';
 import { ProductDeleteButton } from './_components/ProductDeleteButton';
@@ -81,7 +81,7 @@ export default async function ProductList({
               </Button>
             </form>
             <Button asChild variant="outline" className="bg-primary text-white">
-              <Link href="/product-crud/create">
+              <Link href="products/create">
                 <span className="md:hidden block">
                   <PackagePlus />
                 </span>{' '}
@@ -159,7 +159,7 @@ export default async function ProductList({
                     {/* On Sale and Discount Badges */}
                     <div className="absolute top-2 bg-black right-0 space-y-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
                       <p className="text-[10px] py-[1px] px-1">
-                        <Link href={`/product-crud/edit/${product.id}`}>
+                        <Link href={`products/edit/${product.id}`}>
                           <FilePenLine className="w-5 h-5 text-primary" />
                         </Link>
                       </p>
@@ -170,7 +170,7 @@ export default async function ProductList({
                   </div>
 
                   <Link
-                    href={`/product-crud/${product.id}`}
+                    href={`products/${product.id}`}
                     className="space-y-2 flex flex-col justify-between h-[75px] "
                   >
                     <p className="min-h-[40px] text-sm font-semibold pt-1">

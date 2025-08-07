@@ -11,7 +11,7 @@ export default function Home() {
               <Link href="/tic-tac-toe/setup">Assignment-1</Link>
             </Button>
             <Button asChild variant="outline">
-              <Link href="/product-crud">Assignment-2</Link>
+              <Link href="/products">Assignment-2</Link>
             </Button>
           </div>
         </div>
@@ -31,7 +31,7 @@ export default function Home() {
           variant="outline"
           className="w-[200px] h-[200px] hover:bg-red-500 hover:text-white"
         >
-          <Link href="/product-crud">Assignment-2</Link>
+          <Link href="/assignment-2/products">Assignment-2</Link>
         </Button>
       </div>
     </>

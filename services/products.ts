@@ -17,7 +17,7 @@ export const createProduct = async (product: ProductInput) => {
     });
 
     const data = await response.json();
-    revalidatePath('/product-crud');
+    revalidatePath('/products');
 
     if (!response.ok) {
       return {

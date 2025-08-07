@@ -47,7 +47,7 @@
 //       });
 
 //       // Redirect to dashboard or any private page
-//       router.push('/product-crud');
+//       router.push('/products');
 //     } else {
 //       toast.error(error ?? 'Something went wrong.');
 //     }
