@@ -62,7 +62,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         const res = await updateProduct(productId, values);
         if (res?.data) {
           toast.success('Product Updated!');
-          router.push('/products');
+          router.push('/assignment-2/products');
         } else {
           toast.error(res.error);
         }
@@ -71,7 +71,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         console.log('🚀 ~ onSubmit ~ res:', res);
         if (res?.data) {
           toast.success('Product created!');
-          router.push('/products');
+          router.push('/assignment-2/products');
         } else {
           toast.error(res.error);
         }

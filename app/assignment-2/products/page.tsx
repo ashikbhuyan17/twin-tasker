@@ -10,7 +10,7 @@ import Link from 'next/link';
 import topImg from '../../../public/file.svg';
 import defaultImg from '../../../public/default.png';
 import CustomPagination from './_components/Pagination';
-import { FilePenLine, PackagePlus } from 'lucide-react';
+import { ArrowLeft, FilePenLine, PackagePlus } from 'lucide-react';
 import { ProductDeleteButton } from './_components/ProductDeleteButton';
 
 interface Props {
@@ -53,9 +53,19 @@ export default async function ProductList({
       {/* Top Bar */}
       <section className="w-full shadow-sm bg-white sticky top-0 z-50">
         <div className="md:max-w-7xl mx-auto md:flex md:justify-between md:items-center md:px-4 py-3">
-          <h1 className="text-lg font-semibold max-md:hidden w-3/12">
-            Product List
-          </h1>
+          <div className="w-2/5 flex items-center gap-x-4">
+            <div className="flex gap-x-1 items-center">
+              <div className="bg-white flex justify-center items-center shadow rounded-full h-8 w-8 cursor-pointer">
+                <Link href="/">
+                  <ArrowLeft className="h-5 w-5" />
+                </Link>
+              </div>
+              {/* <p>Home</p> */}
+            </div>
+            <h1 className="text-lg font-semibold max-md:hidden ">
+              Product List
+            </h1>
+          </div>
           <div className="flex gap-3 w-full">
             <form method="GET" className="flex gap-2 w-full ">
               <div className="w-full">
@@ -140,7 +150,7 @@ export default async function ProductList({
 
         {/* Product List */}
         {products?.data?.length > 0 ? (
-          <div>
+          <div className="w-full">
             <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 max-md:pt-4 gap-2 md:gap-4 w-full pb-10">
               {products?.data?.map((product: Product) => (
                 <div
