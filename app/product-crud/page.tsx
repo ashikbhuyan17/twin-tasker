@@ -10,7 +10,7 @@ import Link from 'next/link';
 import topImg from '../../public/file.svg';
 import defaultImg from '../../public/default.png';
 import CustomPagination from './_components/Pagination';
-import { PackagePlus } from 'lucide-react';
+import { FilePenLine, PackagePlus } from 'lucide-react';
 
 interface Props {
   searchParams: { category?: string; search?: string; page?: string };
@@ -156,6 +156,14 @@ export default async function ProductList({
                       fill
                       priority
                     />
+                    {/* On Sale and Discount Badges */}
+                    <div className="absolute top-2 right-0 space-y-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                      <p className="text-[10px] py-[1px] px-1">
+                        <Link href={`/product-crud/edit/${product.id}`}>
+                          <FilePenLine className="w-5 h-5 text-primary" />
+                        </Link>
+                      </p>
+                    </div>
                   </div>
 
                   <div className="space-y-4 mt-4">

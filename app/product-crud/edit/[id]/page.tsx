@@ -14,7 +14,7 @@ export default async function CreateProductPage({
     title: product.title,
     price: product.price.toString(),
     description: product.description,
-    categoryId: product.category?.id ?? 0, // fallback to 0 if missing
+    categoryId: product.category?.id ?? 0, 
     images: product.images,
   };
 
