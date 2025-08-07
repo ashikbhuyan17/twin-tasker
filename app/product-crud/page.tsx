@@ -53,26 +53,30 @@ export default async function ProductList({
     <section className="lg:container mx-auto px-1 md:space-y-10">
       {/* Top Bar */}
       <section className="w-full shadow-sm bg-white sticky top-0 z-50">
-        <div className="md:max-w-7xl mx-auto flex justify-between items-center md:px-4 py-3">
-          <h1 className="text-lg font-semibold max-md:hidden">Product List</h1>
-          <div className="flex gap-3 ">
-            <form method="GET" className="flex gap-2">
-              <input
-                type="text"
-                name="search"
-                placeholder="Search..."
-                defaultValue={search}
-                className="border px-3 py-1 rounded-md text-sm"
-              />
-              <input
-                type="hidden"
-                name="category"
-                value={`${selectedCategory}&${currentPage}`}
-              />
+        <div className="md:max-w-7xl mx-auto md:flex md:justify-between md:items-center md:px-4 py-3">
+          <h1 className="text-lg font-semibold max-md:hidden w-3/12">
+            Product List
+          </h1>
+          <div className="flex gap-3 w-full">
+            <form method="GET" className="flex gap-2 w-full ">
+              <div className="w-full">
+                <input
+                  type="text"
+                  name="search"
+                  placeholder="Search..."
+                  defaultValue={search}
+                  className="w-full border px-3 py-2 rounded-md text-sm"
+                />
+                <input
+                  type="hidden"
+                  name="category"
+                  value={`${selectedCategory}`}
+                />
+              </div>
               <Button
                 type="submit"
                 variant="outline"
-                className="bg-primary text-white text-sm"
+                className=" bg-primary text-white text-sm"
               >
                 Search
               </Button>
