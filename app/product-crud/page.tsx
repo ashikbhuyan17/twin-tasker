@@ -43,10 +43,8 @@ export default async function ProductList({
     getCategories(),
     getTotalProduct(),
   ]);
-  console.log('🚀 ~ ProductList ~ products:', products);
 
   const total = totalProduct?.data?.length + 1 || 0;
-  console.log('🚀 ~ ProductList ~ total:', total);
   const totalPages = Math.ceil(total / limit);
 
   return (
@@ -161,7 +159,7 @@ export default async function ProductList({
                   </div>
 
                   <div className="space-y-4 mt-4">
-                    <p className="max-h-[35px] max-md:text-sm">
+                    <p className="min-h-[40px] max-md:text-sm">
                       {product.title.length > 30
                         ? product.title.substring(0, 30) + '...'
                         : product.title}
@@ -172,7 +170,7 @@ export default async function ProductList({
                           ${product.price.toFixed(2)}
                         </span>
                       </p>
-                      <button className="border-1 max-md:text-sm border-red-300 py-[2px] px-2 rounded-md font-medium uppercase w-[90px] cursor-pointer">
+                      <button className="border-1 max-md:text-sm border-red-300  px-2 rounded-md font-medium uppercase w-[90px] cursor-pointer">
                         add
                       </button>
                     </div>

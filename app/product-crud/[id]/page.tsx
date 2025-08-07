@@ -39,9 +39,9 @@ export default async function ProductDetails({
     );
   }
 
-  // const getProductPrice = (product: any): number => {
-  //   return product.price;
-  // };
+  const getProductPrice = (price: number): number => {
+    return price;
+  };
 
   return (
     <div>
@@ -59,12 +59,12 @@ export default async function ProductDetails({
             <div className="flex items-center justify-between py-2">
               <div>
                 <div className="flex items-center space-x-2">
-                  {/* <span className="font-extrabold text-2xl">
+                  <span className="font-extrabold text-2xl">
                     ৳
-                    {getProductPrice(product) % 1 === 0
-                      ? getProductPrice(product)
-                      : getProductPrice(product).toFixed(2)}
-                  </span> */}
+                    {getProductPrice(product?.price) % 1 === 0
+                      ? getProductPrice(product?.price)
+                      : getProductPrice(product?.price).toFixed(2)}
+                  </span>
                 </div>
                 <div className="text-xs text-gray-400">
                   (Inclusive of all taxes)

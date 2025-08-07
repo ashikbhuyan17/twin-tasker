@@ -2,6 +2,7 @@
 
 import { ProductInput } from '@/lib/validations/productSchema';
 import { apiBaseUrl } from './baseUrl';
+import { revalidatePath } from 'next/cache';
 
 // CREATE product
 export const createProduct = async (product: ProductInput) => {
@@ -16,7 +17,7 @@ export const createProduct = async (product: ProductInput) => {
     });
 
     const data = await response.json();
-    console.log('🚀 ~ createProduct ~ data:', data);
+    revalidatePath('/product-crud');
 
     if (!response.ok) {
       return {
@@ -141,7 +142,11 @@ export const getTotalProduct = async () => {
 };
 
 // get single product
-export const getSingleProduct = async ({ productId }: { productId: string }) => {
+export const getSingleProduct = async ({
+  productId,
+}: {
+  productId: string;
+}) => {
   try {
     const response = await fetch(`${apiBaseUrl}/v1/products/${productId}`, {
       method: 'GET',
@@ -171,7 +176,6 @@ export const getSingleProduct = async ({ productId }: { productId: string }) => 
     };
   }
 };
-
 
 export const getCategories = async () => {
   try {
