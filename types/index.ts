@@ -15,8 +15,6 @@ export interface Product {
   images: string[];
 }
 
-
-
 export type ProductInput = {
   title: string;
   price: number;
@@ -24,3 +22,26 @@ export type ProductInput = {
   categoryId: number;
   images: string[];
 };
+
+export interface Player {
+  name: string;
+  symbol: 'X' | 'O';
+  wins: number;
+  losses: number;
+  draws: number;
+}
+
+export interface GameState {
+  board: (string | null)[];
+  currentPlayer: 'X' | 'O';
+  winner: string | null;
+  isDraw: boolean;
+  round: number;
+  gamePhase: 'setup' | 'playing' | 'roundComplete' | 'gameComplete';
+  players: {
+    X: Player;
+    O: Player;
+  };
+}
+
+export type GameView = 'setup' | 'game' | 'leaderboard' | 'victory';
