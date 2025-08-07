@@ -40,8 +40,9 @@ export const createProduct = async (product: ProductInput) => {
 
 // UPDATE product
 export const updateProduct = async (id: number, product: ProductInput) => {
+  console.log('🚀 ~ updateProduct ~ id:', id, product);
   try {
-    const response = await fetch(`${apiBaseUrl}/products/${id}`, {
+    const response = await fetch(`${apiBaseUrl}/v1/products/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

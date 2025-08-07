@@ -10,7 +10,7 @@ export default async function CreateProductPage() {
   }
 
   return (
-    <div className="p-6 space-y-10">
+    <div className="md:space-y-10">
       <Breadcrumb title="Create New Product" />
       <ProductForm categories={categories} />
     </div>

@@ -15,3 +15,12 @@ export interface Product {
   images: string[];
 }
 
+
+
+export type ProductInput = {
+  title: string;
+  price: number;
+  description: string;
+  categoryId: number;
+  images: string[];
+};
