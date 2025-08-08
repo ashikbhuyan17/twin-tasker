@@ -1,10 +1,13 @@
+'use client';
 import React from 'react';
 import { Trophy, Home, RotateCcw } from 'lucide-react';
 import { useAppSelector, useAppDispatch } from '@/store/hooks';
 import { clearLeaderboard } from '@/store/gameSlice';
 import { setView } from '@/store/viewSlice';
+import { useRouter } from 'next/navigation';
 
 const LeaderboardPage: React.FC = () => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const players = useAppSelector((state) => state.game.players);
 
@@ -12,6 +15,7 @@ const LeaderboardPage: React.FC = () => {
 
   const handleBackToGame = () => {
     dispatch(setView('game'));
+    router.push('game');
   };
 
   const handleClearLeaderboard = () => {

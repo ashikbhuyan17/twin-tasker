@@ -1,10 +1,13 @@
+'use client';
 import React, { useState } from 'react';
 import { User, Play } from 'lucide-react';
 import { useAppDispatch } from '@/store/hooks';
 import { setPlayerNames } from '@/store/gameSlice';
 import { setView } from '@/store/viewSlice';
+import { useRouter } from 'next/navigation';
 
 const PlayerSetupPage: React.FC = () => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const [playerXName, setPlayerXName] = useState('');
   const [playerOName, setPlayerOName] = useState('');
@@ -20,6 +23,7 @@ const PlayerSetupPage: React.FC = () => {
         })
       );
       dispatch(setView('game'));
+      router.push('game');
     }
   };
 
