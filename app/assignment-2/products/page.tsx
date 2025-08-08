@@ -12,27 +12,19 @@ import defaultImg from '../../../public/default.png';
 import CustomPagination from './_components/Pagination';
 import { ArrowLeft, FilePenLine, PackagePlus } from 'lucide-react';
 import { ProductDeleteButton } from './_components/ProductDeleteButton';
-
-interface Props {
-  searchParams: { category?: string; search?: string; page?: string };
-}
+import ProductSearch from './_components/ProductSearch';
 
 export default async function ProductList({
   searchParams,
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  // Await the searchParams promise to get the actual filter object
   const filters = await searchParams;
-  // const selectedCategory = searchParams?.category ?? '';
-  // const search = searchParams?.search ?? '';
-  // const currentPage = Number(searchParams?.page ?? '0');
-  // const limit = 30;
   const selectedCategory = (filters.category as string) ?? '';
   const search = (filters.search as string) ?? '';
-  const currentPage = Number(filters.page ?? '0'); // Default to page 1
-  const limit = 30;
-  const offset = currentPage;
+  const currentPage = Number(filters.page ?? '0'); // starts from 0
+  const limit = 10;
+  const offset = currentPage * limit;
 
   const [products, categories, totalProduct] = await Promise.all([
     getProduct({
@@ -44,8 +36,7 @@ export default async function ProductList({
     getCategories(),
     getTotalProduct(),
   ]);
-
-  const total = totalProduct?.data?.length + 1 || 0;
+  const total = totalProduct?.data?.length || 0;
   const totalPages = Math.ceil(total / limit);
 
   return (
@@ -53,20 +44,22 @@ export default async function ProductList({
       {/* Top Bar */}
       <section className="w-full shadow-sm bg-white sticky top-0 z-50">
         <div className="md:max-w-7xl mx-auto md:flex md:justify-between md:items-center md:px-4 py-3">
-          <div className="w-2/5 flex items-center gap-x-4">
+          <div className="w-1/2 flex items-center gap-x-4 max-md:pb-2">
             <div className="flex gap-x-1 items-center">
               <div className="bg-white flex justify-center items-center shadow rounded-full h-8 w-8 cursor-pointer">
                 <Link href="/">
                   <ArrowLeft className="h-5 w-5" />
                 </Link>
               </div>
-              {/* <p>Home</p> */}
             </div>
-            <h1 className="text-lg font-semibold max-md:hidden ">
+            <Button asChild variant="outline">
+              <Link href="/assignment-1/tic-tac-toe/setup">Assignment-1</Link>
+            </Button>
+            {/* <h1 className="text-lg font-semibold max-md:hidden ">
               Product List
-            </h1>
+            </h1> */}
           </div>
-          <div className="flex gap-3 w-full">
+          {/* <div className="flex gap-3 w-full">
             <form method="GET" className="flex gap-2 w-full ">
               <div className="w-full">
                 <input
@@ -98,6 +91,26 @@ export default async function ProductList({
                 <span className="md:block hidden">Create</span>
               </Link>
             </Button>
+          </div> */}
+          <div className="w-full flex gap-3">
+            <div className="w-full">
+              <ProductSearch
+                selectedCategory={selectedCategory}
+                defaultSearch={search}
+              />
+            </div>
+            <Button
+              asChild
+              variant="outline"
+              className="bg-primary text-white md:w-1/4"
+            >
+              <Link href="products/create">
+                <span className="md:hidden block">
+                  <PackagePlus />
+                </span>{' '}
+                <span className="md:block hidden">Create</span>
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -106,7 +119,6 @@ export default async function ProductList({
         {/* Sidebar */}
         <div className="w-[83px] md:w-[300px] sticky top-20 overflow-y-auto min-h-[calc(100vh-100px)] border-1 border-gray-200 rounded-md">
           <div className="max-h-[calc(100vh-60px)] overflow-y-scroll">
-            {/* Top Picks */}
             <Link
               href={`?category=&search=${search}&page=${currentPage}`}
               className={`flex items-center gap-2 max-md:flex-col px-2 py-2 md:py-4 ${
@@ -166,7 +178,7 @@ export default async function ProductList({
                       fill
                       priority
                     />
-                    {/* On Sale and Discount Badges */}
+                    {/* Update and Delete button */}
                     <div className="absolute top-2 bg-black right-0 space-y-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
                       <p className="text-[10px] py-[1px] px-1">
                         <Link href={`products/edit/${product.id}`}>
@@ -183,9 +195,14 @@ export default async function ProductList({
                     href={`products/${product.id}`}
                     className="space-y-2 flex flex-col justify-between h-[75px] "
                   >
-                    <p className="min-h-[40px] text-sm font-semibold pt-1">
+                    <p className="min-h-[40px] hidden sm:block text-sm font-semibold pt-1">
                       {product.title.length > 30
                         ? product.title.substring(0, 30) + '...'
+                        : product.title}
+                    </p>
+                    <p className="min-h-[40px] block sm:hidden text-sm font-semibold pt-1">
+                      {product.title.length > 25
+                        ? product.title.substring(0, 25) + '...'
                         : product.title}
                     </p>
                     <div className="flex items-center">
@@ -202,11 +219,10 @@ export default async function ProductList({
                 </div>
               ))}
             </div>
+            {/* pagination */}
             <CustomPagination
               currentPage={currentPage}
               totalPages={totalPages}
-              category={selectedCategory}
-              search={search}
             />
           </div>
         ) : (

@@ -10,13 +10,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { Card, CardContent } from '@/components/ui/card';
+import { CardContent } from '@/components/ui/card';
 import { Product } from '@/types';
 
-// interface ProductImage {
-//   link: string;
-//   isThumb?: boolean;
-// }
 interface ImageSectionProps {
   product: Product;
 }
@@ -36,8 +32,8 @@ const ImageSection = ({ product }: ImageSectionProps) => {
               key={index}
               src={selectedImage}
               alt={product.title || 'Product Image'}
-              width={500}
-              height={500}
+              width={375}
+              height={375}
               className={cn(
                 'mb-4 h-full w-full border-gray-200 object-contain transition-opacity duration-500 ease-in-out',
                 selectedImage === image ? 'block' : 'hidden'
@@ -53,7 +49,7 @@ const ImageSection = ({ product }: ImageSectionProps) => {
             {product.images?.map((image, i) => (
               <CarouselItem
                 key={i}
-                className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5"
+                className="basis-1/4 sm:basis-1/3 md:basis-1/4 lg:basis-1/5"
               >
                 <CardContent className="relative flex aspect-square cursor-pointer items-center justify-center p-0">
                   <button

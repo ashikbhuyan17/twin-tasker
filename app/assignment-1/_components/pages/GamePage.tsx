@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 import React, { useEffect } from 'react';
 import { Trophy, RotateCcw } from 'lucide-react';
@@ -14,7 +15,6 @@ const GamePage: React.FC = () => {
   const dispatch = useAppDispatch();
   const gameState = useAppSelector((state) => state.game);
   const currentView = useAppSelector((state) => state.view.currentView);
-  // console.log('🚀 ~ GamePage ~ gameState:', gameState);
 
   useEffect(() => {
     console.log('🚀 ~ GamePage ~ gameState.gamePhase :', gameState.gamePhase);

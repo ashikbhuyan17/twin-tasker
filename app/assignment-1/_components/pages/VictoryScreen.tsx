@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { Trophy, RotateCcw, User, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Trophy, RotateCcw, User, ArrowLeft } from 'lucide-react';
 import { useAppSelector, useAppDispatch } from '@/store/hooks';
 import { restartMatch, newMatch } from '@/store/gameSlice';
 import { setView } from '@/store/viewSlice';

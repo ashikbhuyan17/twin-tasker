@@ -4,10 +4,6 @@ import { checkGameComplete } from '@/lib/gameUtils';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setView } from '@/store/viewSlice';
 import React, { useEffect } from 'react';
-import PlayerSetupPage from '../_components/pages/PlayerSetupPage';
-import GamePage from '../_components/pages/GamePage';
-import LeaderboardPage from '../_components/pages/LeaderboardPage';
-import VictoryScreen from '../_components/pages/VictoryScreen';
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
@@ -53,31 +49,15 @@ export default function Home() {
         router.push('tic-tac-toe/setup');
         break;
       default:
-        // By default, or if the view is 'setup', we'll stay on the home page.
-        // This assumes the root '/' page is the setup page.
         router.push('/');
         break;
     }
   }, [currentView, router]);
 
-  //   switch (currentView) {
-  //   case 'setup':
-  //     return <PlayerSetupPage />;
-  //   case 'game':
-  //     return <GamePage />;
-  //   case 'leaderboard':
-  //     return <LeaderboardPage />;
-  //   case 'victory':
-  //     return <VictoryScreen />;
-  //   default:
-  //     return <PlayerSetupPage />;
-  // }
-
   // Render appropriate page based on current view
   return (
     <div>
-      <h1>Welcome to the Game Setup</h1>
-      {/* Any setup-specific UI can go here */}
+      <h1>Welcome to the Game Page</h1>
     </div>
   );
 }

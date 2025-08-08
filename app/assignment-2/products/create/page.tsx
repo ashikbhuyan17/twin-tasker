@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { getCategories } from '@/services/products';
 import { ProductForm } from '../_components/ProductForm';
 import { Breadcrumb } from '@/components/Breadcrumb';

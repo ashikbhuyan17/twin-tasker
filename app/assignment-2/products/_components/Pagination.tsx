@@ -1,90 +1,74 @@
 'use client';
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from '@/components/ui/pagination';
+
+import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-interface Props {
-  totalPages: number;
-  currentPage: number;
-  category: string;
-  search: string;
-}
-
-const CustomPagination = ({
-  totalPages,
+export default function CustomPagination({
   currentPage,
-  category,
-  search,
-}: Props) => {
+  totalPages,
+}: {
+  currentPage: number; // zero-based
+  totalPages: number; // total pages count (zero-based length)
+}) {
   const searchParams = useSearchParams();
+  const category = searchParams.get('category') || '';
+  const search = searchParams.get('search') || '';
 
-  // Function to create a URL with updated page number
-  const createPageURL = (pageNumber: number | string) => {
-    const params = new URLSearchParams(searchParams);
-    params.set('page', pageNumber.toString());
-    if (category) {
-      params.set('category', category);
-    }
-    if (search) {
-      params.set('search', search);
-    }
-    return `?${params.toString()}`;
-  };
+  const createLink = (page: number) =>
+    `?category=${category}&search=${search}&page=${page}`;
 
-  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+  const pages = [];
+  for (let i = 0; i < totalPages; i++) {
+    if (i === 0 || i === totalPages - 1 || Math.abs(i - currentPage) <= 1) {
+      pages.push(i);
+    } else if (
+      (i === currentPage - 2 && i > 0) ||
+      (i === currentPage + 2 && i < totalPages - 1)
+    ) {
+      pages.push('...');
+    }
+  }
 
   return (
-    <Pagination>
-      <PaginationContent>
-        {/* Previous Button */}
-        <PaginationItem>
-          <PaginationPrevious
-            href={createPageURL(currentPage > 1 ? currentPage - 1 : 1)}
-            aria-disabled={currentPage <= 1}
-            tabIndex={currentPage <= 1 ? -1 : undefined}
-            className={
-              currentPage <= 1 ? 'pointer-events-none opacity-50' : undefined
-            }
-          />
-        </PaginationItem>
+    <div className="flex justify-center mb-6 space-x-1 items-center">
+      <Link
+        href={createLink(Math.max(0, currentPage - 1))}
+        className={`px-3 py-1 text-[10px] sm:text-sm ${
+          currentPage === 0 ? 'opacity-50 pointer-events-none' : ''
+        }`}
+      >
+        <ChevronLeft className="inline w-4 h-4" /> Previous
+      </Link>
 
-        {/* Page Numbers */}
-        {pages.map((page) => (
-          <PaginationItem key={page}>
-            <PaginationLink
-              href={createPageURL(page)}
-              isActive={page === currentPage}
-            >
-              {page}
-            </PaginationLink>
-          </PaginationItem>
-        ))}
+      {pages.map((p, idx) =>
+        p === '...' ? (
+          <span key={idx} className="px-3 py-1 text-[10px] sm:text-sm">
+            ...
+          </span>
+        ) : (
+          <Link
+            key={idx}
+            href={createLink(p as number)}
+            className={`px-3 py-1 text-[10px] sm:text-sm rounded ${
+              currentPage === p
+                ? 'bg-gray-200 font-semibold'
+                : 'hover:bg-gray-100'
+            }`}
+          >
+            {(p as number) + 1} {/* Display starts from 1 */}
+          </Link>
+        )
+      )}
 
-        {/* Next Button */}
-        <PaginationItem>
-          <PaginationNext
-            href={createPageURL(
-              currentPage < totalPages ? currentPage + 1 : totalPages
-            )}
-            aria-disabled={currentPage >= totalPages}
-            tabIndex={currentPage >= totalPages ? -1 : undefined}
-            className={
-              currentPage >= totalPages
-                ? 'pointer-events-none opacity-50'
-                : undefined
-            }
-          />
-        </PaginationItem>
-      </PaginationContent>
-    </Pagination>
+      <Link
+        href={createLink(Math.min(totalPages - 1, currentPage + 1))}
+        className={`px-3 py-1 text-[10px] sm:text-sm ${
+          currentPage === totalPages - 1 ? 'opacity-50 pointer-events-none' : ''
+        }`}
+      >
+        Next <ChevronRight className="inline w-4 h-4" />
+      </Link>
+    </div>
   );
-};
-
-export default CustomPagination;
+}

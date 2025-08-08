@@ -3,9 +3,7 @@ import { Breadcrumb } from '@/components/Breadcrumb';
 import { Button } from '@/components/ui/button';
 import { getSingleProduct } from '@/services/products';
 
-// type PageProps = {
-//   params: { id: string };
-// };
+
 
 const features = [
   {
