@@ -56,7 +56,6 @@ const gameSlice = createSlice({
         state.players.X.draws++;
         state.players.O.draws++;
       } else {
-        // Switch players
         state.currentPlayer = state.currentPlayer === 'X' ? 'O' : 'X';
       }
     },
@@ -90,7 +89,6 @@ const gameSlice = createSlice({
     },
 
     newMatch: () =>
-      // state
       {
         return { ...initialState };
       },

@@ -1,6 +1,4 @@
-// validations/productSchema.ts
 import { z } from 'zod';
-
 export const productSchema = z.object({
   title: z.string().min(2, 'Title is too short').max(100, 'Title too long'),
   price: z.number().min(1, 'Price must be at least 1'),

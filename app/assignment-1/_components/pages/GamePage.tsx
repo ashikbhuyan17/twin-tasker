@@ -1,15 +1,48 @@
-import React from 'react';
+'use client';
+import React, { useEffect } from 'react';
 import { Trophy, RotateCcw } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { makeMove, resetRound } from '@/store/gameSlice';
 import { setView } from '@/store/viewSlice';
 import PlayerCard from '../ui/PlayerCard';
 import GameBoard from '../ui/GameBoard';
+import { useRouter } from 'next/navigation';
+import { checkGameComplete } from '@/lib/gameUtils';
 
 const GamePage: React.FC = () => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const gameState = useAppSelector((state) => state.game);
+  const currentView = useAppSelector((state) => state.view.currentView);
+  // console.log('🚀 ~ GamePage ~ gameState:', gameState);
 
+  useEffect(() => {
+    console.log('🚀 ~ GamePage ~ gameState.gamePhase :', gameState.gamePhase);
+    if (gameState.gamePhase === 'playing') {
+      const isGameComplete = checkGameComplete(
+        gameState.players.X,
+        gameState.players.O,
+        gameState.round
+      );
+      console.log('🚀 ~ GamePage ~ isGameComplete:', isGameComplete);
+
+      if (isGameComplete && currentView === 'game') {
+        console.log(
+          "🚀 ~ GamePage ~ isGameComplete && currentView === 'game':",
+          isGameComplete && currentView === 'game'
+        );
+        dispatch(setView('victory'));
+        router.push('victory');
+      }
+    }
+  }, [
+    gameState.players.X.wins,
+    gameState.players.O.wins,
+    gameState.round,
+    gameState.gamePhase,
+    currentView,
+    dispatch,
+  ]);
   const handleCellClick = (index: number) => {
     dispatch(makeMove(index));
   };
@@ -20,6 +53,7 @@ const GamePage: React.FC = () => {
 
   const handleGoToLeaderboard = () => {
     dispatch(setView('leaderboard'));
+    router.push('leaderboard');
   };
 
   return (

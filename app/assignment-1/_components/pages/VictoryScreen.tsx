@@ -1,11 +1,14 @@
+'use client';
 import React from 'react';
-import { Trophy, RotateCcw, User } from 'lucide-react';
+import { Trophy, RotateCcw, User, ArrowRight, ArrowLeft } from 'lucide-react';
 import { useAppSelector, useAppDispatch } from '@/store/hooks';
 import { restartMatch, newMatch } from '@/store/gameSlice';
 import { setView } from '@/store/viewSlice';
 import { getWinner } from '@/lib/gameUtils';
+import { useRouter } from 'next/navigation';
 
 const VictoryScreen: React.FC = () => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const players = useAppSelector((state) => state.game.players);
 
@@ -15,11 +18,17 @@ const VictoryScreen: React.FC = () => {
   const handleRestartMatch = () => {
     dispatch(restartMatch());
     dispatch(setView('game'));
+    router.push('game');
   };
 
   const handleNewMatch = () => {
     dispatch(newMatch());
     dispatch(setView('setup'));
+    router.push('setup');
+  };
+  const handleLeaderboard = () => {
+    dispatch(setView('leaderboard'));
+    router.push('leaderboard');
   };
 
   return (
@@ -69,6 +78,13 @@ const VictoryScreen: React.FC = () => {
         </div>
 
         <div className="space-y-3">
+          <button
+            onClick={handleLeaderboard}
+            className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            Back to Leaderboard
+          </button>
           <button
             onClick={handleRestartMatch}
             className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
