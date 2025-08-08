@@ -2,13 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import gameReducer from './gameSlice';
 import viewReducer from './viewSlice';
 import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // uses localStorage for web
+import storage from 'redux-persist/lib/storage'; 
 
-// Persist config for only the parts we want to save
+// Persist config 
 const gamePersistConfig = {
   key: 'game',
   storage,
-  whitelist: ['players', 'round'], // persist scores & round, not board state
+  whitelist: ['players', 'round'],
 };
 
 const persistedGameReducer = persistReducer(gamePersistConfig, gameReducer);
@@ -16,11 +16,11 @@ const persistedGameReducer = persistReducer(gamePersistConfig, gameReducer);
 export const store = configureStore({
   reducer: {
     game: persistedGameReducer,
-    view: viewReducer, // view is not persisted
+    view: viewReducer, 
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false, // required for redux-persist
+      serializableCheck: false, 
     }),
 });
 

@@ -5,7 +5,7 @@ const COOKIE_KEY = 'ticTacToeState';
 
 export const saveGameState = (state: GameState) => {
   if (typeof window === 'undefined') return;
-  Cookies.set(COOKIE_KEY, JSON.stringify(state), { expires: 7 }); // 7 days
+  Cookies.set(COOKIE_KEY, JSON.stringify(state), { expires: 7 }); 
 };
 
 export const loadGameState = (): GameState | null => {
