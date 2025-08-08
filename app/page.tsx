@@ -22,7 +22,10 @@ export default function Home() {
           variant="outline"
           className="w-[200px] h-[200px] hover:bg-red-500 hover:text-white"
         >
-          <Link href="/assignment-1/tic-tac-toe" className="font-semibold">
+          <Link
+            href="/assignment-1/tic-tac-toe/setup"
+            className="font-semibold"
+          >
             Assignment-1
           </Link>
         </Button>
