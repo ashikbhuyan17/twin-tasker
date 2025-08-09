@@ -2,7 +2,7 @@
 import React from 'react';
 import { Trophy, Home, RotateCcw } from 'lucide-react';
 import { useAppSelector, useAppDispatch } from '@/store/hooks';
-import { clearLeaderboard } from '@/store/gameSlice';
+import { clearLeaderboard, restartMatch } from '@/store/gameSlice';
 import { setView } from '@/store/viewSlice';
 import { useRouter } from 'next/navigation';
 
@@ -20,6 +20,9 @@ const LeaderboardPage: React.FC = () => {
 
   const handleClearLeaderboard = () => {
     dispatch(clearLeaderboard());
+    dispatch(restartMatch());
+    dispatch(setView('game'));
+    router.push('game');
   };
 
   return (

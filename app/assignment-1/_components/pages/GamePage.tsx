@@ -17,7 +17,6 @@ const GamePage: React.FC = () => {
   const currentView = useAppSelector((state) => state.view.currentView);
 
   useEffect(() => {
-    console.log('🚀 ~ GamePage ~ gameState.gamePhase :', gameState.gamePhase);
     if (gameState.gamePhase === 'playing') {
       const isGameComplete = checkGameComplete(
         gameState.players.X,
