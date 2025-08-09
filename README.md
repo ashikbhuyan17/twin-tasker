@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TwinTasker — React Developer Assignment
 
-## Getting Started
+## 🚀 Live Links
 
-First, run the development server:
+- **Home:** [https://twin-tasker.vercel.app/](https://twin-tasker.vercel.app/)
+- **Assignment-1 (Tic-Tac-Toe — Player Setup):** [https://twin-tasker.vercel.app/assignment-1/tic-tac-toe/setup](https://twin-tasker.vercel.app/assignment-1/tic-tac-toe/setup)
+- **Assignment-2 (Products List / CRUD):** [https://twin-tasker.vercel.app/assignment-2/products](https://twin-tasker.vercel.app/assignment-2/products)
+
+---
+
+
+### This project is built as part of a React Developer assessment. It contains **two independent assignments** accessible via a navigation bar:
+
+
+## 🎮 Assignment-1: Tic-Tac-Toe Game
+
+A multi-page Tic-Tac-Toe game with:
+
+- **Two-player turn-based gameplay**
+- **Scoring system:**
+  - Win → 2 points
+  - Loss → 1 point
+  - Draw → 0 points
+- **Best of 5 rounds** (first to 3 wins is the final winner)
+- **Session-based leaderboard** (persisted on reload)
+- Pages:
+  1. **Player Setup** — Form to enter player names (validation included)
+  2. **Game Page** — 3×3 interactive board, current turn indicator, live scores, round reset
+  3. **Leaderboard** — Session scores with clear/reset option
+  4. **Victory Screen** — Final results with restart/new match options
+
+---
+
+## 🛍 Assignment-2: CRUD Product App
+
+A product management application with:
+
+- **Product List Page**
+  - Pagination
+  - Real-time search by name
+  - Category-based filtering (fixed sidebar)
+  - Product deletion with confirmation
+- **Create & Edit Page**
+  - Full form validations:
+    - Required fields
+    - Length limits
+    - Data type checks
+- **Details Page**
+  - Full product information display
+
+**API Used:** [Platzi Fake Store API](https://fakeapi.platzi.com/en)
+
+---
+
+## 🛠 Tech Stack
+
+- **Framework:** [Next.js (App Router)](https://nextjs.org/)
+- **State Management:** [Redux Toolkit](https://redux-toolkit.js.org/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Deployment:** [Vercel](https://vercel.com/)
+
+---
+
+## 📦 Installation & Setup
 
 ```bash
+# Clone the repository
+git clone https://github.com/ashikbhuyan17/twin-tasker.git
+
+# Navigate to project folder
+cd twin-tasker
+
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
